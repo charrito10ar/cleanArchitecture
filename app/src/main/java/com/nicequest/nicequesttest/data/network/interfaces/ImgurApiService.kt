@@ -5,9 +5,9 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface RetrofitImageService {
+interface ImgurApiService {
 
     @GET("/3/gallery/t/cats/{pageNumber}")
-    fun getItemCats(@Path("pageNumber") pageNumber: Int): Observable<ResponseImgur>
+    fun getCatsByPage(@Path("pageNumber") pageNumber: Int): Observable<ResponseImgur>
 
 }

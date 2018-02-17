@@ -11,13 +11,11 @@ public class AuthenticationApiEndPoint {
     private OAuthInterface mApi;
 
     public AuthenticationApiEndPoint() {
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(OAuthInterface.endPoint)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         mApi = retrofit.create(OAuthInterface.class);
-
     }
 
     public Call<ResponseToken> refreshToken(String refreshToken, String clientId, String clientSecret, String grantType) {

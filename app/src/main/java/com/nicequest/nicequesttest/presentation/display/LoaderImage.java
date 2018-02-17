@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.nicequest.nicequesttest.R;
+import com.nicequest.nicequesttest.presentation.BaseApplication;
 
 public class LoaderImage implements LoaderImageInterface{
     private static LoaderImage instance;
@@ -18,8 +19,8 @@ public class LoaderImage implements LoaderImageInterface{
     }
 
     @Override
-    public void loadCoverMovie(View context, String url, ImageView imageView) {
-        Glide.with(context.getContext())
+    public void loadCoverMovie(String url, ImageView imageView) {
+        Glide.with(BaseApplication.getApp().component().context())
                 .load(url)
                 .apply(new RequestOptions().placeholder(R.drawable.placeholder_waiting).error(R.drawable.placeholder_waiting))
                 .into(imageView);

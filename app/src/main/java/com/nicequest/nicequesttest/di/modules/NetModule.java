@@ -1,59 +1,39 @@
 package com.nicequest.nicequesttest.di.modules;
 
-import android.app.Application;
-
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.nicequest.nicequesttest.data.network.RetrofitAuthenticator;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class NetModule {
-    String mBaseUrl;
 
-    public NetModule(String mBaseUrl) {
-        this.mBaseUrl = mBaseUrl;
-    }
 
     @Provides
     @Singleton
-    Cache provideHttpCache(Application application) {
-        int cacheSize = 10 * 1024 * 1024;
-        Cache cache = new Cache(application.getCacheDir(), cacheSize);
-        return cache;
-    }
+    Retrofit provideRetrofit() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.authenticator(new RetrofitAuthenticator());
+        builder.addInterceptor(chain -> {
+            Request request = chain.request().newBuilder()
+                    .addHeader("Authorization", "Client-ID f17d2424d09ef1c").build();
+            return chain.proceed(request);
+        });
 
-    @Provides
-    @Singleton
-    Gson provideGson() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        return gsonBuilder.create();
-    }
+        OkHttpClient okHttpClient = builder.build();
 
-    @Provides
-    @Singleton
-    OkHttpClient provideOkhttpClient(Cache cache) {
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        client.cache(cache);
-        return client.build();
-    }
-
-    @Provides
-    @Singleton
-    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl(mBaseUrl)
+                .baseUrl("https://api.imgur.com/")
                 .client(okHttpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 }

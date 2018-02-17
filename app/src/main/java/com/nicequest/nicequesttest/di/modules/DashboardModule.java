@@ -2,9 +2,13 @@ package com.nicequest.nicequesttest.di.modules;
 
 import android.content.Context;
 
+import com.nicequest.nicequesttest.data.network.CloudCatsAdapter;
+import com.nicequest.nicequesttest.data.network.bodies.ResponseImgur;
 import com.nicequest.nicequesttest.data.repository.CatsRepository;
 import com.nicequest.nicequesttest.data.repository.Repository;
-import com.nicequest.nicequesttest.domain.usecase.GetTopCats;
+import com.nicequest.nicequesttest.domain.usecase.GetTopCatsUseCase;
+import com.nicequest.nicequesttest.domain.usecase.UseCase;
+import com.nicequest.nicequesttest.presentation.BaseApplication;
 import com.nicequest.nicequesttest.presentation.adapters.CatAdapter;
 import com.nicequest.nicequesttest.di.ActivityScope;
 import com.nicequest.nicequesttest.presentation.presenters.DashboardFragmentPresenter;
@@ -28,7 +32,7 @@ public class DashboardModule {
     @Provides
     @ActivityScope
     public CatAdapter provideItemDashboardAdapter(){
-        return new CatAdapter(new ArrayList<>(), context);
+        return new CatAdapter(context);
     }
 
     @Provides
@@ -39,14 +43,27 @@ public class DashboardModule {
 
     @Provides
     @ActivityScope
-    public DashboardFragmentPresenter providePresenter(DashboardFragmentView view){
-        return new DashboardFragmentPresenter(view, new GetTopCats(new CatsRepository()));
+    public DashboardFragmentPresenter providePresenter(DashboardFragmentView view, GetTopCatsUseCase getTopCats){
+        return new DashboardFragmentPresenter(view, getTopCats);
     }
 
-//    @Provides
-//    @ActivityScope
-//    public Repository provideCatRepository(){
-//        return new CatsRepository();
-//    }
+    @Provides
+    @ActivityScope
+    public UseCase<ResponseImgur> provideGetTopCats(Repository repository){
+        return new GetTopCatsUseCase(repository);
+    }
+
+    @Provides
+    @ActivityScope
+    public Repository provideCatRepository(CloudCatsAdapter cloudCatsAdapter){
+        return new CatsRepository(cloudCatsAdapter);
+    }
+
+    @Provides
+    @ActivityScope
+    public CloudCatsAdapter provideCloudCatsAdapter(){
+        return new CloudCatsAdapter(BaseApplication.getApp().getNetComponent().retrofit());
+    }
+
 
 }

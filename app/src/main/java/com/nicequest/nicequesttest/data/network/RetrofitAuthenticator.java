@@ -3,16 +3,12 @@ package com.nicequest.nicequesttest.data.network;
 
 import android.support.annotation.NonNull;
 
-import com.marcelo.privalia.moviesapp.data.network.interfaces.RetrofitImageService;
 import com.nicequest.nicequesttest.data.bodies.ResponseToken;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 
 import javax.annotation.Nullable;
 
-import io.reactivex.Observable;
 import okhttp3.Authenticator;
 import okhttp3.Request;
 import okhttp3.Response;

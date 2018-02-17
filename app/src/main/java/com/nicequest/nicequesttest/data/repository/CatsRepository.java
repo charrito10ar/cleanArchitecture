@@ -1,17 +1,22 @@
 package com.nicequest.nicequesttest.data.repository;
 
-import com.nicequest.nicequesttest.data.network.ApiService;
+import com.nicequest.nicequesttest.data.network.CloudCatsAdapter;
 import com.nicequest.nicequesttest.data.network.bodies.ResponseImgur;
-import javax.inject.Singleton;
 
+import javax.inject.Inject;
 import io.reactivex.Observable;
 
-
-@Singleton
 public class CatsRepository implements Repository{
 
+    private CloudCatsAdapter cloudCatsAdapter;
+
+    @Inject
+    public CatsRepository(CloudCatsAdapter catsRestAdapter){
+        cloudCatsAdapter = catsRestAdapter;
+    }
+
     @Override
-    public Observable<ResponseImgur> getTopCats(int page) {
-        return ApiService.getApiEndPoint().getImages(page);
+    public Observable<ResponseImgur> getByPage(int page) {
+        return cloudCatsAdapter.getByPage(page);
     }
 }

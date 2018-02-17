@@ -6,5 +6,5 @@ import io.reactivex.Observable;
 
 
 public interface Repository {
-    Observable<ResponseImgur> getTopCats(int page);
+    Observable<ResponseImgur> getByPage(int page);
 }

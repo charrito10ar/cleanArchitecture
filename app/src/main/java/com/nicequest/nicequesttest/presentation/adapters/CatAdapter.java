@@ -16,7 +16,10 @@ import com.nicequest.nicequesttest.domain.model.ItemCat;
 import com.nicequest.nicequesttest.presentation.display.DisplayUtils;
 import com.nicequest.nicequesttest.presentation.display.LoaderImage;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,8 +29,9 @@ public class CatAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ItemCat> itemList;
     private Context context;
 
-    public CatAdapter(List<ItemCat> items, Context context){
-        this.itemList = items;
+    @Inject
+    public CatAdapter(Context context){
+        this.itemList = new ArrayList<>();
         this.context = context;
     }
     @Override
@@ -77,7 +81,7 @@ public class CatAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private void bindCat(final ItemCat cat) {
             this.setThumbnailHeight(cat);
-            LoaderImage.getInstance().loadCoverMovie(itemView, cat.getUrl(), thumbnail);
+            LoaderImage.getInstance().loadCoverMovie(cat.getUrl(), thumbnail);
             title.setText(cat.getTitle());
             views.setText(String.valueOf(cat.getViews()));
         }

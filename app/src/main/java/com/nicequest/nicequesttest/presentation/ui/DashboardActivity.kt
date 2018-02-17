@@ -1,4 +1,4 @@
-package com.nicequest.nicequesttest.presentation
+package com.nicequest.nicequesttest.presentation.ui
 
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
@@ -10,8 +10,8 @@ import com.nicequest.nicequesttest.di.components.ApplicationComponent
 import com.nicequest.nicequesttest.di.components.DaggerDashboardComponent
 import com.nicequest.nicequesttest.di.modules.DashboardModule
 import com.nicequest.nicequesttest.domain.model.ItemCat
+import com.nicequest.nicequesttest.presentation.BaseActivity
 import com.nicequest.nicequesttest.presentation.presenters.DashboardFragmentPresenter
-import com.nicequest.nicequesttest.presentation.ui.DashboardFragmentView
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -49,10 +49,6 @@ class DashboardActivity : BaseActivity(), DashboardFragmentView{
             }
         })
         swipe_refresh_layout.setProgressViewOffset(false, 0,200)
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onPause() {
