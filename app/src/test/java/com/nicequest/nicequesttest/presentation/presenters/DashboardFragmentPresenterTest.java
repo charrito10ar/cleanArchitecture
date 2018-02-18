@@ -5,7 +5,7 @@ import com.nicequest.nicequesttest.data.network.bodies.Data;
 import com.nicequest.nicequesttest.data.network.bodies.ResponseImgur;
 import com.nicequest.nicequesttest.domain.model.ItemCat;
 import com.nicequest.nicequesttest.domain.usecase.GetTopCatsUseCase;
-import com.nicequest.nicequesttest.presentation.ui.DashboardFragmentView;
+import com.nicequest.nicequesttest.presentation.ui.DashboardView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,18 +26,18 @@ import io.reactivex.schedulers.Schedulers;
 public class DashboardFragmentPresenterTest {
 
     @Mock
-    private DashboardFragmentView viewMock;
+    private DashboardView viewMock;
     @Mock
     private GetTopCatsUseCase topCatsUseCaseMock;
     @Mock
     private List<ItemCat> itemCatEntityListMock;
-    DashboardFragmentPresenter presenter;
+    DashboardPresenter presenter;
     private Data data;
 
     @Before
     public void setUp() throws Exception {
         RxAndroidPlugins.setInitMainThreadSchedulerHandler(scheduler -> Schedulers.trampoline());
-        presenter = new DashboardFragmentPresenter(viewMock, topCatsUseCaseMock);
+        presenter = new DashboardPresenter(viewMock, topCatsUseCaseMock);
         data = new Data("title", new ArrayList<>());
     }
 

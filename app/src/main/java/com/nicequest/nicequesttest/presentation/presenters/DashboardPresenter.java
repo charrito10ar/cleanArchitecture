@@ -5,7 +5,7 @@ import com.nicequest.nicequesttest.domain.mappers.MapperCats;
 import com.nicequest.nicequesttest.domain.model.ItemCat;
 import com.nicequest.nicequesttest.domain.usecase.GetTopCatsUseCase;
 import com.nicequest.nicequesttest.domain.usecase.UseCase;
-import com.nicequest.nicequesttest.presentation.ui.DashboardFragmentView;
+import com.nicequest.nicequesttest.presentation.ui.DashboardView;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import javax.inject.Inject;
@@ -13,14 +13,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class DashboardFragmentPresenter implements DashboardFragmentPresenterInterface{
+public class DashboardPresenter implements DashboardPresenterInterface {
 
-    private DashboardFragmentView view;
+    private DashboardView view;
     private Disposable mSubscription;
     private UseCase<ResponseImgur> useCaseGetTopCats;
 
     @Inject
-    public DashboardFragmentPresenter(DashboardFragmentView view, GetTopCatsUseCase getTopCats){
+    public DashboardPresenter(DashboardView view, GetTopCatsUseCase getTopCats){
         this.view = view;
         this.useCaseGetTopCats = getTopCats;
     }

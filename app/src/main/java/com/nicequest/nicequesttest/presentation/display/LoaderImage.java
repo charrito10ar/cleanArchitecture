@@ -1,6 +1,5 @@
 package com.nicequest.nicequesttest.presentation.display;
 
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;

@@ -7,8 +7,8 @@ import com.nicequest.nicequesttest.presentation.ui.DashboardActivity;
 import com.nicequest.nicequesttest.presentation.adapters.CatAdapter;
 import com.nicequest.nicequesttest.di.ActivityScope;
 import com.nicequest.nicequesttest.di.modules.DashboardModule;
-import com.nicequest.nicequesttest.presentation.presenters.DashboardFragmentPresenter;
-import com.nicequest.nicequesttest.presentation.ui.DashboardFragmentView;
+import com.nicequest.nicequesttest.presentation.presenters.DashboardPresenter;
+import com.nicequest.nicequesttest.presentation.ui.DashboardView;
 
 import dagger.Component;
 
@@ -19,9 +19,9 @@ import dagger.Component;
 public interface DashboardComponent {
 
     void inject(DashboardActivity dashboardFragment);
-    DashboardFragmentView getDashboardView();
+    DashboardView getDashboardView();
     CatAdapter getDashboardAdapter();
-    DashboardFragmentPresenter getPresenter();
+    DashboardPresenter getPresenter();
     CatsRepository getCatReposotory();
     GetTopCatsUseCase getTopCats();
     CloudCatsAdapter getCloudCatsAdapter();

@@ -11,14 +11,14 @@ import com.nicequest.nicequesttest.di.components.DaggerDashboardComponent
 import com.nicequest.nicequesttest.di.modules.DashboardModule
 import com.nicequest.nicequesttest.domain.model.ItemCat
 import com.nicequest.nicequesttest.presentation.BaseActivity
-import com.nicequest.nicequesttest.presentation.presenters.DashboardFragmentPresenter
+import com.nicequest.nicequesttest.presentation.presenters.DashboardPresenterInterface
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class DashboardActivity : BaseActivity(), DashboardFragmentView{
+class DashboardActivity : BaseActivity(), DashboardView {
 
     @Inject lateinit var catsAdapter: CatAdapter
-    @Inject lateinit var presenter: DashboardFragmentPresenter
+    @Inject lateinit var presenter: DashboardPresenterInterface
 
     private lateinit var appComponent: ApplicationComponent
 
